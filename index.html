@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Coffee shop</title>
+        <style>
+            body{
+                margin:0;
+                display:flex;
+                background-color:burlywood;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+            #card{
+                width: 400px;
+                background-color: lightcoral;
+                padding: 20px;
+                border-radius: 10px;
+                border: 2px solid white;
+            }
+            #chat{
+                color: whitesmoke;
+                height: 300px;
+                overflow-y: auto;
+                margin-bottom: 10px;
+                padding: 10px;
+                border: 1px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="card">
+            <div id="header">
+                <h2>Welcome to Coffee Shop ChatBot</h2>
+            </div>
+            <div id="chat">
+                <p> <b> Bot :</b> Hello! how can i help you? </p>
+            </div>
+            <div id="row">
+                <input type="text" id="userInput" onkeydown="if(event.key === 'Enter') sendMessage()">
+                <button id="sendBtn" onclick="sendMessage()"> Send </button>
+            </div>
+        </div>
+
+        <script>
+
+
+            function sendMessage(){
+                let input=document.getElementById("userInput").value.toLowerCase().trim()
+                if(!input) return;
+                let reply='Sorry i did not quite understand that!';
+            
+                let chat=document.getElementById("chat");
+                chat.innerHTML+=`<p> <b>You :</b> <span> ${input} </span> </p>`;
+
+                if(input.includes("hi") || input.includes("hello")){
+                    reply='Hello ! Welcome to Coffee shop.';
+                }else if(input.includes("menu")){
+                    reply='Our menu include latte, cappuccino ,espresso !';
+                }else if(input.includes("latte")){
+                    if(input.includes("order")){
+                        reply='Okay ! Order of latte placed !'
+                    }else{
+                        reply='Cost of latte is 140 rs';
+                    }
+                }else if(input.includes("cappuccino")){
+                    if(input.includes("order")){
+                        reply='Okay ! Order of cappuccino placed !'
+                    }else{
+                        reply='Cost of cappuccino is 120 rs';
+                    }
+                }else if(input.includes("espresso")){
+                    if(input.includes("order")){
+                        reply='Okay ! Order of espresso placed !'
+                    }else{
+                        reply='Cost of espresso is 90 rs';
+                    }
+                }else if(input.includes("time")){
+                    reply='Shop is open 24hrs !';
+                }else if(input.includes("bye")){
+                    reply='Thank you! visit again';
+                }
+
+                chat.innerHTML+=`<p><b>Bot :</b> <span> ${reply} </span> </p>`;
+                document.getElementById("userInput").value='';
+
+            }
+        </script>
+    </body>
+</html>
